@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Implementation-Title: demo-app
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: yy
+Implementation-Vendor-Id: com.demo
+Build-Jdk: 1.8.0_162
+Implementation-URL: http://projects.spring.io/spring-boot/demo/demo-ap
+ p/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: com.demo.DemoApplication
+
