@@ -2,7 +2,11 @@ package jre8Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * 测试map()方法
@@ -34,5 +38,5 @@ public class TestMap {
 		String[] nameArr = menu.stream().map(Dish::getName).distinct().toArray(String[]::new);
 		Arrays.asList(nameArr).stream().forEach(System.out::println);
 	}
-
+	
 }
