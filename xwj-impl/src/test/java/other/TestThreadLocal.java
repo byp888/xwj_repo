@@ -17,6 +17,7 @@ public class TestThreadLocal {
 		System.out.println(test.getName());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String getName(){
 		String xwj = (String) processHolder.get();
 		if(StringUtils.isEmpty(xwj)){
