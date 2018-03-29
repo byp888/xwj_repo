@@ -1,11 +1,9 @@
 package com.test.elasticsearch.xwj;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
@@ -14,6 +12,7 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 public class ElasticSearchHandler {
 
+	@SuppressWarnings({ "resource", "deprecation" })
 	public static void main(String[] args) {
 		try {
 			/* 创建客户端 */
@@ -29,15 +28,12 @@ public class ElasticSearchHandler {
 			List<String> jsonData = DataFactory.getInitJsonData();
 
 			for (int i = 0; i < jsonData.size(); i++) {
-				IndexResponse response = client.prepareIndex("blog", "article").setSource(jsonData.get(i)).get();
+				client.prepareIndex("blog", "article").setSource(jsonData.get(i)).get();
 			}
 			client.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		} 
 	}
 
 }

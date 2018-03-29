@@ -16,7 +16,7 @@ import org.junit.Before;
 /**
  * 抽象的Junit测试
  * 
- * @time 2018年3月2日09:37:17
+ * @author xuwenjin
  *
  */
 public abstract class AbstractJunitTest {
@@ -29,14 +29,12 @@ public abstract class AbstractJunitTest {
 	 * @return
 	 * @throws UnknownHostException
 	 */
-
 	@SuppressWarnings("resource")
 	@Before
 	public void getClient() throws UnknownHostException {
 		Settings settings = Settings.builder().put("cluster.name", "xwj").build();
 
-		TransportAddress transportAddress = new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"),
-				9300);
+		TransportAddress transportAddress = new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300);
 		client = new PreBuiltTransportClient(settings).addTransportAddress(transportAddress);
 	}
 
@@ -44,4 +42,5 @@ public abstract class AbstractJunitTest {
 	public void close() {
 		client.close();
 	}
+	
 }

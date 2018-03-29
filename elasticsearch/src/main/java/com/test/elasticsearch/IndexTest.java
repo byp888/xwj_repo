@@ -17,26 +17,32 @@ import org.junit.Test;
 /**
  * 索引操作测试
  * 
- * @time 2018年3月2日10:39:07
- *
+ * @author xuwenjin
  */
 public class IndexTest extends AbstractJunitTest {
 
-	boolean isIndexExists(String indexName) {
+	/**
+	 * 判断是否存在该索引
+	 * 
+	 * @param indexName
+	 *            索引名称
+	 * @return
+	 */
+	public boolean isIndexExists(String indexName) {
 		IndicesExistsRequestBuilder builder = client.admin().indices().prepareExists(indexName);
 		IndicesExistsResponse res = builder.get();
 		return res.isExists();
 	}
 
 	/**
-	 *  5.*之后，把string字段设置为了过时字段，引入text，keyword字段
-	 *  
-	 *  keyword：存储数据时候，不会分词建立索引
-	 *	text：存储数据时候，会自动分词，并生成索引（这是很智能的，但在有些字段里面是没用的，所以对于有些字段使用text则浪费了空间）。
+	 * 5.*之后，把string字段设置为了过时字段，引入text，keyword字段
+	 * 
+	 * keyword：存储数据时候，不会分词建立索引
+	 * text：存储数据时候，会自动分词，并生成索引（这是很智能的，但在有些字段里面是没用的，所以对于有些字段使用text则浪费了空间）。
 	 *
-	 *  如果在添加分词器的字段上，把type设置为keyword，则创建索引会失败
+	 * 如果在添加分词器的字段上，把type设置为keyword，则创建索引会失败
 	 */
-	XContentBuilder getIndexSource() throws IOException {
+	public XContentBuilder getIndexSource() throws IOException {
 		XContentBuilder source = XContentFactory.jsonBuilder().startObject().startObject("test_type2")
 				.startObject("properties")
 				// code字段
@@ -47,10 +53,18 @@ public class IndexTest extends AbstractJunitTest {
 				.startObject("info").field("type", "keyword").field("store", false).field("index", true).endObject()
 				// 主要内容字段
 				.startObject("content").field("type", "text").field("store", true).field("index", true).field("analyzer", "ik_max_word").endObject()
+				.startObject("my_title").field("type", "keyword").field("store", true).field("index", true).endObject()
+				.startObject("you_title").field("type", "keyword").field("store", true).field("index", true).endObject()
+				.startObject("isDelete").field("type", "boolean").field("store", true).field("index", true).endObject()
+				.startObject("age").field("type", "long").field("store", true).field("index", true).endObject()
+				
 				.endObject().endObject().endObject();
 		return source;
 	}
 
+	/**
+	 * 创建索引
+	 */
 	@Test
 	public void createIndex() {
 		try {
@@ -75,6 +89,9 @@ public class IndexTest extends AbstractJunitTest {
 		}
 	}
 
+	/**
+	 * 删除索引
+	 */
 	@Test
 	public void deleteIndex() {
 		try {
@@ -89,4 +106,5 @@ public class IndexTest extends AbstractJunitTest {
 			logger.error("删除索引失败！", e);
 		}
 	}
+
 }
