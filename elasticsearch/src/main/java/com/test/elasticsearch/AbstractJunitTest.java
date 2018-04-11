@@ -17,17 +17,15 @@ import org.junit.Before;
  * 抽象的Junit测试
  * 
  * @author xuwenjin
- *
  */
 public abstract class AbstractJunitTest {
+	
 	protected Logger logger = LogManager.getLogger(this.getClass());
+	
 	protected Client client;
 
 	/**
 	 * 获取一个客户端
-	 * 
-	 * @return
-	 * @throws UnknownHostException
 	 */
 	@SuppressWarnings("resource")
 	@Before
@@ -38,6 +36,9 @@ public abstract class AbstractJunitTest {
 		client = new PreBuiltTransportClient(settings).addTransportAddress(transportAddress);
 	}
 
+	/**
+	 * 关闭连接
+	 */
 	@After
 	public void close() {
 		client.close();

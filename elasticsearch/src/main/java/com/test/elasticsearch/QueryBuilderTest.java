@@ -221,5 +221,6 @@ public class QueryBuilderTest extends AbstractJunitTest {
 		}
 		System.out.println("-----------------------------------");
 	}
+	
 
 }
