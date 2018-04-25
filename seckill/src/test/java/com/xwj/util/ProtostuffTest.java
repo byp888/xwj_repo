@@ -58,7 +58,7 @@ public class ProtostuffTest {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		System.out.println(speedTestOrg(1000000000, 1));
-//		System.out.println(speedTest(1000000000, 1));
+		System.out.println(speedTest(1000000000, 1));
 	}
 
 }

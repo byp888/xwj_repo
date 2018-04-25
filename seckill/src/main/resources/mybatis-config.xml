@@ -13,4 +13,10 @@
 		<!-- 开启自动驼峰命名规则 -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
+
+	<!-- 配置别名 -->
+	<typeAliases>
+		<package name="com.xwj.entity"/>
+	</typeAliases>
+	
 </configuration>
