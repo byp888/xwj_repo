@@ -2,7 +2,8 @@ package com.xwj.temp;
 
 import java.util.List;
 
-import com.alibaba.dubbo.common.utils.CollectionUtils;
+import org.springframework.util.CollectionUtils;
+
 import com.xwj.temp.rule.IBaseRule;
 
 /**
@@ -62,7 +63,7 @@ public abstract class AbstractCommonTemp {
 
 	private void before(StringBuilder info) {
 		List<IBaseRule> beforeRules = this.getRulePack().getBefore();
-		if (CollectionUtils.isNotEmpty(beforeRules)) {
+		if (!CollectionUtils.isEmpty(beforeRules)) {
 			beforeRules.stream().forEach(d -> {
 				d.process(info);
 			});
@@ -71,7 +72,7 @@ public abstract class AbstractCommonTemp {
 
 	private void after(StringBuilder info) {
 		List<IBaseRule> afterRules = this.getRulePack().getAfter();
-		if (CollectionUtils.isNotEmpty(afterRules)) {
+		if (!CollectionUtils.isEmpty(afterRules)) {
 			afterRules.stream().forEach(d -> {
 				d.process(info);
 			});

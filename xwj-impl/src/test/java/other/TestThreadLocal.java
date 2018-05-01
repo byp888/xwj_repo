@@ -1,11 +1,11 @@
 package other;
 
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StringUtils;
 
 /**
  * @author xuwenjin
  *
- * 为了线程安全
+ * 测试线程安全
  */
 public class TestThreadLocal {
 	
