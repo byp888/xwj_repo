@@ -38,6 +38,11 @@ public class TestObjectMapper {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
+	/**
+	 * 默认将字段首字母变为小写
+	 * 
+	 * 转为对象时，一定要有无参构造器
+	 */
 	@Test
 	public void testObj() throws JsonGenerationException, JsonMappingException, IOException {
 		XwjUser user = new XwjUser(1, "Hello World", new Date());
