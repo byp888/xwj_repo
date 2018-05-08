@@ -52,13 +52,24 @@ public abstract class AbstractCommonTemp {
 	 */
 	public abstract void operator(StringBuilder info);
 
-	public void doAction(StringBuilder info) {
-		before(info);
+	public final void doAction(StringBuilder info) {
+		if (checkBefore()) {
+			before(info);
+		}
 
 		operator(info);
 
 		after(info);
 		System.out.println("最终结果：" + info.toString());
+	}
+
+	/**
+	 * 钩子函数，提供一个默认或空的实现，具体的子类可以自行决定是否挂钩及如何挂钩
+	 * 
+	 * @return
+	 */
+	public boolean checkBefore() {
+		return true;
 	}
 
 	private void before(StringBuilder info) {

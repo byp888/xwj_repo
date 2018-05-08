@@ -7,5 +7,10 @@ public class InsertTemp extends AbstractCommonTemp {
 		System.out.println("insert");
 		info.append(", insert");
 	}
+	
+	@Override
+	public boolean checkBefore() {
+		return false;
+	}
 
 }
