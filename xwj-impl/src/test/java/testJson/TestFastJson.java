@@ -153,7 +153,7 @@ public class TestFastJson {
 	}
 	
 	/**
-	 * 将Map转成JSONObject，然后添加元素，输出
+	 * 将List对象转成JSONArray，然后输出
 	 */
 	@Test
 	public void testJsonArray() {

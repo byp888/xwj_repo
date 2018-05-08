@@ -1,5 +1,6 @@
 package com.xwj.proxy.staproxy;
 
+import com.xwj.proxy.RealSubject;
 import com.xwj.proxy.Subject;
 
 /**
