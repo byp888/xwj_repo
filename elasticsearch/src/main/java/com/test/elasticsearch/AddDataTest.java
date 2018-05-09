@@ -10,12 +10,7 @@ import org.junit.Test;
  * 
  * @author xuwenjin
  */
-public class AddDataTest extends AbstractJunitTest {
-
-	// private static final String INDEX = "test_index1";
-	// private static final String TYPE = "test_type1";
-	private static final String INDEX2 = "test_index2";
-	private static final String TYPE2 = "test_type2";
+public class AddDataTest extends BaseConnect {
 
 	@Test
 	public void saveData() {
@@ -80,12 +75,12 @@ public class AddDataTest extends AbstractJunitTest {
 			source6.put("isDelete", false);
 			source6.put("age", 21);
 
-			client.prepareIndex(INDEX2, TYPE2).setId("1").setSource(source).get();
-			client.prepareIndex(INDEX2, TYPE2).setId("2").setSource(source2).get();
-			client.prepareIndex(INDEX2, TYPE2).setId("3").setSource(source3).get();
-			client.prepareIndex(INDEX2, TYPE2).setId("4").setSource(source4).get();
-			client.prepareIndex(INDEX2, TYPE2).setId("5").setSource(source5).get();
-			client.prepareIndex(INDEX2, TYPE2).setId("6").setSource(source6).get();
+			client.prepareIndex(ComKeys.INDEX, ComKeys.TYPE).setId("1").setSource(source).get();
+			client.prepareIndex(ComKeys.INDEX, ComKeys.TYPE).setId("2").setSource(source2).get();
+			client.prepareIndex(ComKeys.INDEX, ComKeys.TYPE).setId("3").setSource(source3).get();
+			client.prepareIndex(ComKeys.INDEX, ComKeys.TYPE).setId("4").setSource(source4).get();
+			client.prepareIndex(ComKeys.INDEX, ComKeys.TYPE).setId("5").setSource(source5).get();
+			client.prepareIndex(ComKeys.INDEX, ComKeys.TYPE).setId("6").setSource(source6).get();
 
 		} catch (Exception e) {
 			logger.error("保存数据失败！", e);

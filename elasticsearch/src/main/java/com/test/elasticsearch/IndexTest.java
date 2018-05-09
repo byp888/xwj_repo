@@ -19,7 +19,7 @@ import org.junit.Test;
  * 
  * @author xuwenjin
  */
-public class IndexTest extends AbstractJunitTest {
+public class IndexTest extends BaseConnect {
 
 	/**
 	 * 判断是否存在该索引
@@ -43,7 +43,7 @@ public class IndexTest extends AbstractJunitTest {
 	 * 如果在添加分词器的字段上，把type设置为keyword，则创建索引会失败
 	 */
 	public XContentBuilder getIndexSource() throws IOException {
-		XContentBuilder source = XContentFactory.jsonBuilder().startObject().startObject("test_type2")
+		XContentBuilder source = XContentFactory.jsonBuilder().startObject().startObject(ComKeys.TYPE)
 				.startObject("properties")
 				// code字段
 				.startObject("code").field("type", "text").field("index", true).field("fielddata", true).endObject()
@@ -68,11 +68,11 @@ public class IndexTest extends AbstractJunitTest {
 	@Test
 	public void createIndex() {
 		try {
-			if (isIndexExists("test_index2")) {
+			if (isIndexExists(ComKeys.INDEX)) {
 				logger.info("索引对象已经存在，无法创建！");
 				return;
 			}
-			CreateIndexRequestBuilder builder = client.admin().indices().prepareCreate("test_index2");
+			CreateIndexRequestBuilder builder = client.admin().indices().prepareCreate(ComKeys.INDEX);
 			// 直接创建Map结构的setting
 			Map<String, Object> settings = new HashMap<>();
 			settings.put("number_of_shards", 5); // 分片数
@@ -95,7 +95,7 @@ public class IndexTest extends AbstractJunitTest {
 	@Test
 	public void deleteIndex() {
 		try {
-			if (!isIndexExists("test_index2")) {
+			if (!isIndexExists(ComKeys.INDEX)) {
 				logger.info("索引对象已经不存在，无法删除！");
 				return;
 			}

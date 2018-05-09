@@ -16,10 +16,7 @@ import org.junit.Test;
  * 
  * @author xuwenjin
  */
-public class QueryBuilderTest extends AbstractJunitTest {
-
-	private static final String INDEX2 = "test_index2";
-	private static final String TYPE2 = "test_type2";
+public class QueryBuilderTest extends BaseConnect {
 
 	public String text = "科技视频";
 
@@ -112,7 +109,7 @@ public class QueryBuilderTest extends AbstractJunitTest {
 	 */
 	@Test
 	public void typeQuery() {
-		QueryBuilder queryBuilder = QueryBuilders.typeQuery(TYPE2);
+		QueryBuilder queryBuilder = QueryBuilders.typeQuery(ComKeys.TYPE);
 		searchFunction(queryBuilder);
 	}
 
@@ -207,7 +204,7 @@ public class QueryBuilderTest extends AbstractJunitTest {
 	 * @param queryBuilder
 	 */
 	private void searchFunction(QueryBuilder queryBuilder) {
-		SearchRequestBuilder requestBuilder = client.prepareSearch().setIndices(INDEX2).setTypes(TYPE2)
+		SearchRequestBuilder requestBuilder = client.prepareSearch().setIndices(ComKeys.INDEX).setTypes(ComKeys.TYPE)
 				.setScroll(new TimeValue(60000)).setQuery(queryBuilder);
 		SearchResponse response = requestBuilder.setFrom(0).setSize(100).execute().actionGet();
 		System.out.println("--------------查询结果：----------------------");
