@@ -80,7 +80,7 @@ public class IndexTest extends BaseConnect {
 			settings.put("refresh_interval", "10s"); // 刷新间隔
 			builder.setSettings(settings);
 
-			builder.addMapping("test_type2", getIndexSource());
+			builder.addMapping(ComKeys.TYPE, getIndexSource());
 
 			CreateIndexResponse res = builder.get();
 			logger.info(res.isAcknowledged() ? "索引创建成功！" : "索引创建失败！");
@@ -99,7 +99,7 @@ public class IndexTest extends BaseConnect {
 				logger.info("索引对象已经不存在，无法删除！");
 				return;
 			}
-			DeleteIndexRequestBuilder builder = client.admin().indices().prepareDelete("test_index2");
+			DeleteIndexRequestBuilder builder = client.admin().indices().prepareDelete(ComKeys.TYPE);
 			DeleteIndexResponse res = builder.get();
 			logger.info(res.isAcknowledged() ? "删除索引成功！" : "删除索引失败！");
 		} catch (Exception e) {

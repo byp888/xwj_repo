@@ -35,8 +35,8 @@ public class SimpleQueryTest extends BaseConnect {
 			QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(key, "name", "content");
 
 			SearchResponse res = client.prepareSearch().setIndices(ComKeys.INDEX).setTypes(ComKeys.TYPE).setQuery(queryBuilder).get();
-
-			logger.info("查询到的总记录个数为：" + res.getHits().getTotalHits());
+			System.out.println("查询到的总记录个数为：" + res.getHits().getTotalHits());
+			
 			for (int i = 0; i < res.getHits().getTotalHits(); i++) {
 				logger.info("第" + (i + 1) + "条记录主要内容为：" + res.getHits().getAt(i).getSource().get("content"));
 			}

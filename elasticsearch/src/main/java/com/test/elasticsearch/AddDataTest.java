@@ -3,6 +3,7 @@ package com.test.elasticsearch;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.junit.Test;
 
 /**
@@ -85,6 +86,35 @@ public class AddDataTest extends BaseConnect {
 		} catch (Exception e) {
 			logger.error("保存数据失败！", e);
 		}
+	}
+
+	/**
+	 * 批量插入数据
+	 */
+	@Test
+	public void batchInsertData() {
+		long startTimeall = System.currentTimeMillis();
+
+		Map<String, Object> source = new HashMap<String, Object>();
+		source.put("code", "05");
+		source.put("name", "科技视频");
+		source.put("info", "最美天安门");
+		source.put("content", "最美天安门");
+		source.put("my_title", "132445dfgdfg");
+		source.put("you_title", "32557fdgfg");
+		source.put("isDelete", true);
+		source.put("age", 20);
+
+		int index = 10000;
+		BulkRequestBuilder bulkRequest = client.prepareBulk();
+		for (int i = 0; i < 100000; i++) {
+			bulkRequest.add(client.prepareIndex(ComKeys.INDEX, ComKeys.TYPE, i + "").setSource(source));
+			if (i % index == 0) {
+				bulkRequest.execute().actionGet();
+			}
+		}
+		long endTimeall = System.currentTimeMillis(); // 获取结束时间
+		System.out.println("所有运行时间： " + (endTimeall - startTimeall) + "ms");
 	}
 
 }
