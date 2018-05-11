@@ -16,7 +16,7 @@ public class ComKeys {
 	public static final String INDEX = "icop-busisubpack-web";
 //	public static final String INDEX = "test_index";
 
-	public static final String TYPE = "AddContractDisclosureVO";
+	public static final String TYPE = "SubpackContractVO";
 //	public static final String TYPE = "test_type";
 
 }

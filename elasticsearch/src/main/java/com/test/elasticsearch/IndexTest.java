@@ -10,6 +10,8 @@ import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequestBuilder;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsResponse;
+import org.elasticsearch.action.admin.indices.exists.types.TypesExistsRequest;
+import org.elasticsearch.action.admin.indices.exists.types.TypesExistsResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.junit.Test;
@@ -52,12 +54,13 @@ public class IndexTest extends BaseConnect {
 				// 信息字段
 				.startObject("info").field("type", "keyword").field("store", false).field("index", true).endObject()
 				// 主要内容字段
-				.startObject("content").field("type", "text").field("store", true).field("index", true).field("analyzer", "ik_max_word").endObject()
-				.startObject("my_title").field("type", "keyword").field("store", true).field("index", true).endObject()
-				.startObject("you_title").field("type", "keyword").field("store", true).field("index", true).endObject()
-				.startObject("isDelete").field("type", "boolean").field("store", true).field("index", true).endObject()
-				.startObject("age").field("type", "long").field("store", true).field("index", true).endObject()
-				
+				.startObject("content").field("type", "text").field("store", true).field("index", true)
+				.field("analyzer", "ik_max_word").endObject().startObject("my_title").field("type", "keyword")
+				.field("store", true).field("index", true).endObject().startObject("you_title").field("type", "keyword")
+				.field("store", true).field("index", true).endObject().startObject("isDelete").field("type", "boolean")
+				.field("store", true).field("index", true).endObject().startObject("age").field("type", "long")
+				.field("store", true).field("index", true).endObject()
+
 				.endObject().endObject().endObject();
 		return source;
 	}
@@ -69,7 +72,7 @@ public class IndexTest extends BaseConnect {
 	public void createIndex() {
 		try {
 			if (isIndexExists(ComKeys.INDEX)) {
-				logger.info("索引对象已经存在，无法创建！");
+				System.out.println("索引对象已经存在，无法创建！");
 				return;
 			}
 			CreateIndexRequestBuilder builder = client.admin().indices().prepareCreate(ComKeys.INDEX);
@@ -83,10 +86,26 @@ public class IndexTest extends BaseConnect {
 			builder.addMapping(ComKeys.TYPE, getIndexSource());
 
 			CreateIndexResponse res = builder.get();
-			logger.info(res.isAcknowledged() ? "索引创建成功！" : "索引创建失败！");
+			System.out.println(res.isAcknowledged() ? "索引创建成功！" : "索引创建失败！");
 		} catch (Exception e) {
 			logger.error("创建索引失败！", e);
 		}
+	}
+
+	/**
+	 * 判断该索引下，是否存在该类型
+	 * 
+	 * @param indexName
+	 *            索引名称
+	 * @return
+	 */
+	@Test
+	public void isTypeExists() {
+		// 当有多有类型时，只有都存在，才返回true
+		TypesExistsResponse response = client.admin().indices()
+				.typesExists(new TypesExistsRequest(new String[] { ComKeys.INDEX }, ComKeys.TYPE, "SettleVO"))
+				.actionGet();
+		System.out.println(response.isExists());
 	}
 
 	/**

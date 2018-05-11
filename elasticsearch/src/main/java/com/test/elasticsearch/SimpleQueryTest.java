@@ -3,8 +3,6 @@ package com.test.elasticsearch;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.Test;
 
 /**
@@ -31,10 +29,10 @@ public class SimpleQueryTest extends BaseConnect {
 	@Test
 	public void queryList() {
 		try {
-			String key = "周恩来";
-			QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(key, "name", "content");
+//			String key = "周恩来";
+//			QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(key, "name", "content");
 
-			SearchResponse res = client.prepareSearch().setIndices(ComKeys.INDEX).setTypes(ComKeys.TYPE).setQuery(queryBuilder).get();
+			SearchResponse res = client.prepareSearch().setIndices(ComKeys.INDEX).setTypes(ComKeys.TYPE).get();
 			System.out.println("查询到的总记录个数为：" + res.getHits().getTotalHits());
 			
 			for (int i = 0; i < res.getHits().getTotalHits(); i++) {
