@@ -18,6 +18,12 @@ public class TestAspect {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestAspect.class);
 
+	/**
+	 * 通配符：
+	 * *  匹配任意数量的字符
+	 * +  匹配指定类及其子类
+	 * .. 一般用于匹配任意数的子包或参数
+	 */
 	@Pointcut("execution(public * com.xwj.service..*.insert*(..))")
 	private void recordLog() {
 

@@ -10,7 +10,7 @@ server:
 spring: 
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://dev.yonyouccs.com:3001/icop-construct-busisubpack
+    url: jdbc:mysql://dev.yonyouccs.com:3001/custom-zjtl
     username: devmysql
     password: DG3kCZ2Jcmpm
   profiles.active: prd
