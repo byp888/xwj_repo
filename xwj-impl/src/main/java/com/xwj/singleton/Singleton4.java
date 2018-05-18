@@ -9,6 +9,11 @@ package com.xwj.singleton;
  */
 public class Singleton4 {
 
+	/**
+	 * 枚举变成class文件时，变量会变成final staitc的，所以只会被实例化一次
+	 * 
+	 * @author xuwenjin
+	 */
 	private enum EnmuSingleton {
 		INSTANCE;
 		private Singleton4 singleton4;
